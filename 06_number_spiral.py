@@ -1,64 +1,50 @@
-# todos com índice 1 tão dando 0
-# tirar index
+# Problema: Number Spiral
+# Link: https://cses.fi/problemset/task/1071/
+
+# Minha Lógica:
+# Existe uma progressão aritmética na diagonal principal
+# a1 = 1
+# r = 2
+# Usando as coordenadas posso saber o lado do quadrado que número está formando na espiral
+# e calcular o valor pertencente a diagonal desse quadrado.
+# Sabendo esse valor e se o lado do quadrado é par ou ímpar, posso saber se devo seguir no sentido horário
+# ou anti-horário conforme as coordenadas e assim saber se devo somar ou subtrair para achar o resultado.
 
 t = int(input())
-casos = []
+resultado = []
 for i in range(t):
     y, x = list(map(int, input().split()))
-    casos.append([y, x])
 
-# verificar qual o maior quadrado formado
-maior = 0
-for i in casos:
-    if i[0] > maior:
-        maior = i[0]
-    if i[1] > maior:
-        maior = i[1]
-print(maior)
+    numero = 1
+    # saber o lado do quadrado
+    if y == x or x > y:
+        n = x - 1
+    else:
+        n = y - 1
 
-resultado = []
-linha = 1
-coluna = 1
-lado = 1
-numero = 1
+    # soma de progressão aritmética
+    an = 2 + (n - 1) * 2
+    sn = (2 + an) * n // 2  # divisão inteira para não der ruim com números grandes
+    numero += sn
 
-coord_numero = {(1, 1): 1, }
+    if y == x:
+        resultado.append(numero)
 
-while lado < maior:
-    coluna += 1
-    numero += 1
-    # print(numero, [linha, coluna])
-    coord_numero[(linha, coluna)] = numero
-    while linha < lado + 1:
-        linha += 1
-        numero += 1
-        # print(numero, [linha, coluna])
-        coord_numero[(linha, coluna)] = numero
-    while coluna > 1:
-        coluna -= 1
-        numero += 1
-        # print(numero, [linha, coluna])
-        coord_numero[(linha, coluna)] = numero
-    lado += 1
-    linha += 1
-    numero += 1
-    # print(numero, [linha, coluna])
-    coord_numero[(linha, coluna)] = numero
-    while coluna < lado + 1:
-        coluna += 1
-        numero += 1
-        # print(numero, [linha, coluna])
-        coord_numero[(linha, coluna)] = numero
-    while linha > 1:
-        linha -= 1
-        numero += 1
-        # print(numero, [linha, coluna])
-        coord_numero[(linha, coluna)] = numero
-    lado += 1
+    else:
+        if n % 2 == 0:
+            if y < x:
+                numero += n + 1 - y
+                resultado.append(numero)
+            else:
+                numero -= n + 1 - x
+                resultado.append(numero)
+        else:
+            if y < x:
+                numero -= n + 1 - y
+                resultado.append(numero)
+            else:
+                numero += n + 1 - x
+                resultado.append(numero)
 
-for i in casos:
-    linha = i[0]
-    coluna = i[1]
-    # print(coord_numero[(linha, coluna)])
-for i in coord_numero:
-    print(i, " - ", coord_numero[i])
+for i in resultado:
+    print(i)
