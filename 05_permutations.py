@@ -1,3 +1,5 @@
+# Link do Problema: https://cses.fi/problemset/task/1070
+
 n = int(input())
 lista = [i for i in range(1, n+1)]
 

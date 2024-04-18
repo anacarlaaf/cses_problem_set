@@ -1,3 +1,5 @@
+# Link do Problema: https://cses.fi/problemset/task/1069
+
 dna = input()
 max_repeticoes = 1
 repeticoes = 1

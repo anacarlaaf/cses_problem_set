@@ -1,3 +1,5 @@
+# Link do Problema: https://cses.fi/problemset/task/1083
+
 n = int(input())
 # usar o set() quando a ordem não importa torna a execucao mais rapida
 incompleta = set(map(int, input().split()))
